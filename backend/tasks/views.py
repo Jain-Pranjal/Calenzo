@@ -4,15 +4,16 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Task
 from .serializers import TaskSerializer
 from rest_framework.response import Response
+from .permissions import IsTaskOwner
 
 
-
+# we need to override the get_queryset method to ensure that only the authenticated user can see their own tasks and also override the perform_create method to ensure that only the authenticated user can create their own tasks
 
 
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    permission_classes = [IsAuthenticated]    #this will make sure that only authenticated users can access the API
+    permission_classes = [IsAuthenticated,IsTaskOwner]    #this will make sure that only authenticated users can access the API
     
     # neeed to make sure that only the authenticated user can see their own tasks
     def get_queryset(self):

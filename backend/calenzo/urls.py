@@ -26,6 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/tasks/', include('tasks.urls')),
     path('api/events/', include('events.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # Login ke liye
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Token refresh ke liye
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # For login
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # for  Token refresh 
 ]

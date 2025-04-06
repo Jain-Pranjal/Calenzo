@@ -155,7 +155,7 @@ REST_FRAMEWORK = {
 
 # JWT Settings (optional customization)
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Access token 60 min tak valid
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=180),  # Access token 60 min tak valid
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Refresh token 1 din tak valid
     'AUTH_HEADER_TYPES': ('Bearer',),               # Header mein "Bearer <token>"
 }
