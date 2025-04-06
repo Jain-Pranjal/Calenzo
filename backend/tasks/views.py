@@ -16,11 +16,10 @@ class TaskViewSet(viewsets.ModelViewSet):
     
     # neeed to make sure that only the authenticated user can see their own tasks
     def get_queryset(self):
-        queryset = self.queryset
         user = self.request.user
         if user.is_authenticated:
-            queryset = queryset.filter(user=user)
-        return queryset
+            return Task.objects.filter(user=user)
+        return Task.objects.none()
     
     # need to make sure that only the authenticated user can create their own tasks
     def perform_create(self, serializer):
