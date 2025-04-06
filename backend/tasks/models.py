@@ -22,7 +22,17 @@ class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    sequence_number = models.PositiveIntegerField(default=1)  # User-specific ID
+
+    class Meta:
+        unique_together = ('user', 'sequence_number')  # Har user ke liye unique sequence
+
+    def save(self, *args, **kwargs):
+        if not self.id:  # New task
+            last_task = Task.objects.filter(user=self.user).order_by('-sequence_number').first()
+            self.sequence_number = (last_task.sequence_number + 1) if last_task else 1
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
-        return f"{self.title} - {self.user.username}"
-    
+        return f"{self.user.username} - Task {self.sequence_number}"

@@ -2,6 +2,7 @@
 from pathlib import Path
 import os
 from decouple import config
+from datetime import timedelta
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -137,16 +138,15 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     #    'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT
-        # 'rest_framework.authentication.SessionAuthentication',       # Login form
-        # 'rest_framework.authentication.TokenAuthentication',         # DRF Token
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT
+    #     'rest_framework.authentication.SessionAuthentication',       # Login form
+    #     'rest_framework.authentication.TokenAuthentication',         # DRF Token
 
     # ],
 
-
-    #     'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    # ],
+        'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
 
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
