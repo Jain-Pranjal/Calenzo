@@ -135,17 +135,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    #    'DEFAULT_AUTHENTICATION_CLASSES': [
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT
-    #     'rest_framework.authentication.SessionAuthentication',       # Login form
-    #     'rest_framework.authentication.TokenAuthentication',         # DRF Token
-
-    # ],
-
+       'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT
+        # 'rest_framework.authentication.SessionAuthentication',       # Login form
+        # 'rest_framework.authentication.TokenAuthentication',         # DRF Token
+    ],
         'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+         'rest_framework.permissions.IsAuthenticated',
     ],
 
     'DEFAULT_RENDERER_CLASSES': [
@@ -153,3 +150,17 @@ REST_FRAMEWORK = {
         # this will allow the api to return the json response and block the browser response
     ],
 }
+
+
+
+# JWT Settings (optional customization)
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Access token 60 min tak valid
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Refresh token 1 din tak valid
+    'AUTH_HEADER_TYPES': ('Bearer',),               # Header mein "Bearer <token>"
+}
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
