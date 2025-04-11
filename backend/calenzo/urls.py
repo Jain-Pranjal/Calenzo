@@ -30,4 +30,6 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # For login
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # for  Token refresh 
     path('api/google-callback/', lambda request: HttpResponse("Google Callback")),
+    path('api/auth/', include('authentication.urls')),  # New app for auth
+
 ]
