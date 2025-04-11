@@ -20,6 +20,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.http import HttpResponse
 
 
 urlpatterns = [
@@ -28,4 +29,5 @@ urlpatterns = [
     path('api/events/', include('events.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # For login
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # for  Token refresh 
+    path('api/google-callback/', lambda request: HttpResponse("Google Callback")),
 ]

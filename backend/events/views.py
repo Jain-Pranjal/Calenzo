@@ -60,6 +60,7 @@ class EventViewSet(viewsets.ModelViewSet):
                 'description': self.request.data.get('description', event.description),
                 'start': {'dateTime': self.request.data.get('start_time', event.start_time.isoformat()), 'timeZone': 'UTC'},
                 'end': {'dateTime': self.request.data.get('end_time', event.end_time.isoformat()), 'timeZone': 'UTC'},
+                'status': self.request.data.get('status', event.status),
             }
             service.events().update(
                 calendarId='primary',
