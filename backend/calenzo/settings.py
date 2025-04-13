@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'tasks',  
     'events', 
     'authentication',
+    'corsheaders',  # CORS headers
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # CORS middleware
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -160,8 +162,8 @@ REST_FRAMEWORK = {
 
 # JWT Settings (optional customization)
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=180),  # Access token 60 min tak valid
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Refresh token 1 din tak valid
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),  # Access token 60 min tak valid
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),    # Refresh token 1 din tak valid
     'AUTH_HEADER_TYPES': ('Bearer',),               # Header mein "Bearer <token>"
 }
 

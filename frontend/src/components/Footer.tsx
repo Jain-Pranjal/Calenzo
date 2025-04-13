@@ -46,11 +46,10 @@ export default function CalenzoFooter() {
   ]
 
   const socialLinks = [
-    { icon: <Facebook size={18} />, href: "https://facebook.com", label: "Facebook" },
     { icon: <Twitter size={18} />, href: "https://twitter.com", label: "Twitter" },
     { icon: <Instagram size={18} />, href: "https://instagram.com", label: "Instagram" },
     { icon: <Linkedin size={18} />, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: <Github size={18} />, href: "https://github.com", label: "GitHub" },
+    { icon: <Github size={18} />, href: "https://github.com/Jain-Pranjal/Calenzo", label: "GitHub" },
   ]
 
   return (
@@ -103,7 +102,7 @@ export default function CalenzoFooter() {
 
         <div className="mt-12 pt-8 border-t border-white/[0.05] flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/40 text-xs mb-4 md:mb-0">
-            © {currentYear} Calenzo. All rights reserved. Registered in Delaware.
+            © {currentYear} Calenzo. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-white/40 text-xs">
             <Link href="/terms" className="hover:text-white/60 transition-colors">
