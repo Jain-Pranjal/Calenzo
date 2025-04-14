@@ -236,9 +236,12 @@ export default function CalenzoLanding() {
             animate="visible"
             className="flex flex-wrap gap-4 justify-center"
           >
+            <Link href="/login">
             <button className="px-6 py-3 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-medium hover:opacity-90 transition-opacity ">
               Get Started
             </button>
+            </Link>
+
             <button className="px-6 py-3 rounded-full bg-white/[0.05] border border-white/[0.1] text-white/80 font-medium hover:bg-white/[0.1] transition-all">
               Learn More
             </button>

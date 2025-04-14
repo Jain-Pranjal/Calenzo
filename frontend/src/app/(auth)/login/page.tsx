@@ -1,4 +1,4 @@
-
+// frontend/app/(auth)/login/page.tsx
 "use client";
 
 import { useState } from "react";
@@ -17,7 +17,7 @@ export default function LoginPage() {
   const [errors, setErrors] = useState({
     username: "",
     password: "",
-    general: "", // Added for API errors
+    general: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +30,6 @@ export default function LoginPage() {
       [name]: value,
     }));
 
-    // Clear error when user starts typing
     if (errors[name as keyof typeof errors]) {
       setErrors((prev) => ({
         ...prev,
@@ -61,6 +60,30 @@ export default function LoginPage() {
     return isValid;
   };
 
+  const tryRefreshToken = async () => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (!refreshToken) return null;
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/token/refresh/",
+        { refresh: refreshToken },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      localStorage.setItem("accessToken", response.data.access);
+      return response.data.access;
+    } catch (error) {
+      console.error("Refresh token failed:", error);
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("accessToken");
+      return null;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -69,13 +92,27 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:8000/api/token/", credentials,{headers: {
-        "Content-Type": "application/json",
-      }});
+      // Try refreshing token first
+      const refreshedAccessToken = await tryRefreshToken();
+      if (refreshedAccessToken) {
+        router.push("/");
+        return;
+      }
+
+      // If refresh fails or no refresh token, login with credentials
+      const response = await axios.post(
+        "http://localhost:8000/api/token/",
+        credentials,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       localStorage.setItem("accessToken", response.data.access);
       localStorage.setItem("refreshToken", response.data.refresh);
       router.push("/");
-    } catch (error) {
+    } catch (error: any) {
       const errorMsg = error.response?.data?.detail || "Login failed. Please try again.";
       setErrors((prev) => ({
         ...prev,
