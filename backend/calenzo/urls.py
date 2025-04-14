@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/tasks/', include('tasks.urls')),
     path('api/events/', include('events.urls')),
+    path("api/profiles/", include("profiles.urls")),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # For login
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # for  Token refresh 
     path('api/google-callback/', lambda request: HttpResponse("Google Callback")),
